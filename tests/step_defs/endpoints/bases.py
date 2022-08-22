@@ -37,7 +37,6 @@ class BaseClass():
             )
             try:
                 self._orderId = self._response.json()["orderId"]
-                open("endpoints/orderId.txt", "w").write(copy.deepcopy(self._orderId))
             except KeyError:
                 self._error_msg = self._response.json()["error"]
             return self._response
@@ -70,6 +69,3 @@ class BaseClass():
         
     def checking_status_code(self):
         return self._response.status_code
-
-    def getting_response_body(self):
-        return self._response.json()
