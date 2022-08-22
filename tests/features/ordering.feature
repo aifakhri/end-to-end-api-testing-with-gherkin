@@ -1,27 +1,40 @@
-Feature: Ordering and Getting Book
-    As a customer of the book store
-    I want to check the available books on the store and check the book detail
+@transaction
+Feature: Book Transaction
+    As a member of the library
+    I want to checkout the available book
     So that I could order the book
 
-    Scenario Outline: Find all books in the store
-    Given the customer request the list of books
-    When the customer select the specific book with "<bookId>" 
-    Then the customer get the information about the book
-
-    Examples: Book
-        | bookId |
-        | 1      |
-        | 2      |
-        | 6      |
-        
+    @order_book    
     Scenario Outline: Ordering Book
-    Given the customer has decided the book they want to order
-    When the customer fill registration form with their "<customerName>"
-    Then the customer get a valid orderId
+    Given the member has decided the "<bookTitle>" they want to order
+    When the member send the order with their "<memberName>"
+    Then "<memberName>" order is recorded
 
-    Examples: Customer
-        | customerName |
-        | Andy Dwyer   |
-        | Jim Halpert  |
-        | Kevin        |
-    
+    Examples: Members
+        | bookTitle               | memberName   |
+        | The Russian             | Andy Dwyer   |
+        | The Vanishing Half      | Jim Halpert  |
+        | Viscount Who Loved Me   | Angela       |
+
+    @update_info
+    Scenario Outline: Updating Order
+    Given the current "<memberName>" is in the order record
+    When the member want to update their "<newName>"
+    Then the "<newName>" is updated in the record
+
+    Examples: Names
+        | memberName   | newName       |
+        | Andy Dwyer   | Leslie Knope  |
+        | Jim Halpert  | Michael Scott |
+        | Angela       | Annie         |
+
+    @return_book
+    Scenario Outline: Returning a book
+    Given the "<memberName>" wants to return the book
+    Then the order is deleted from the record
+
+    Examples: Member Book List
+        | memberName     |
+        | Leslie Knope   |       
+        | Michael Scott |
+        | Annie         |
