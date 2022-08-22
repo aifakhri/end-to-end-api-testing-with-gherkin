@@ -17,6 +17,7 @@ def given_book_id(books, bookName):
         if book["name"] == bookName:
             return book["id"]
 
+
 @given(parsers.parse('the "{memberName}" wants to return the book'), target_fixture="order_record")
 @given(parsers.parse('the current {memberName} is in the order record'), target_fixture="order_record")
 def order_record(orders, memberName):
@@ -38,6 +39,7 @@ def order_record(orders, memberName):
         response = orders.submitting_book_order()
         print(response)
         return response.json()["orderId"]
+
 
 #When Script
 @when(parsers.parse('the member send the order with their "{memberName}"'))
@@ -67,6 +69,7 @@ def check_updated_member_name(orders, order_record, newName):
     record = response.json()
     assert record["customerName"] == newName
 
+
 @then("the order is deleted from the record")
 def delete_order(orders, order_record):
     orders.deleting_ordered_book_record(orderId=order_record)
@@ -75,4 +78,3 @@ def delete_order(orders, order_record):
 
     check_order = check_order.json()
     assert order_record in check_order["error"]
-    
