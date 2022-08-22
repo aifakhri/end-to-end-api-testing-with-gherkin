@@ -8,7 +8,18 @@ There are two features that can be tested:
 
 
 ## How To Run
-Currently only the view feature is available to test. To, test this feature, the following command can be used:
+To run all the tests use this command:
 ```Console
-pytest -k test_view
+pytest
 ```
+To run only view feature use this command:
+```Console
+pytest -m view
+```
+To run only transaction feature use this command:
+```Console
+pytest -m transaction
+```
+
+## Notes
+If you have plenty of orders at the endpoint you could delete all the orders by using the ``delete_all_order.py`` script.
