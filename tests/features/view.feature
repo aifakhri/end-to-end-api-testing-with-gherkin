@@ -1,3 +1,4 @@
+@view
 Feature: Viewing Books
     As a member of a library
     I want to be able to get book info
@@ -11,4 +12,4 @@ Feature: Viewing Books
     | bookTitle             |
     | The Russian           |
     | The Vanishing Half    |
-    | Viscount Who Loved    |
+    | Viscount Who Loved Me |
