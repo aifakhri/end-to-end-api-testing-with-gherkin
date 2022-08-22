@@ -1,9 +1,9 @@
 import copy
 import pytest
 
-from endpoints.apiClient import ApiClient
-from endpoints.books import BookEndpoint
-from endpoints.orders import OrderEndpoint
+from .endpoints.apiClient import ApiClient
+from .endpoints.books import BookEndpoint
+from .endpoints.orders import OrderEndpoint
 
 @pytest.fixture
 def apiToken():
@@ -27,5 +27,7 @@ def books():
     return BookEndpoint()
 
 @pytest.fixture
-def orders():
-    return OrderEndpoint()
+def orders(apiToken):
+    order_instance = OrderEndpoint()
+    order_instance.setup_auth_headers(apiToken)
+    return order_instance
